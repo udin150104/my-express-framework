@@ -16,7 +16,7 @@ npm --version
 10.9.2
 ```
 
-# Role & Menu Config
+### Role & Menu Config
 ``` bash
 # role config/roles.json
 # menu config/menus.json
