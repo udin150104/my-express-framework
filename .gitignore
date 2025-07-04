@@ -12,3 +12,6 @@ node_modules/
 
 # Abaikan database.db
 databases/database.db
+
+# Abaikan .env
+.env
