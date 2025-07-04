@@ -1,10 +1,11 @@
 # Abaikan semua file .log di folder logs/
 logs/*.log
 
-# Jangan abaikan file lain di folder logs/
+# Jangan abaikan file dan folder penting di logs/
 !logs/
 !logs/**/
 !logs/*.txt
+!logs/.gitkeep
 
 # Abaikan node_modules
 node_modules/
