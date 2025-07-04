@@ -1,0 +1,185 @@
+<div class="container-fluid mt-2 mb-2">
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <div class="card rounded-0 border-0 bg-transparent">
+        <div class="card-header border-0 bg-transparent"">
+          <h5 class="card-title text-muted bg-transparent"">Ringkasan </h5>
+        </div>
+      </div>
+
+      <% if (success && success.message) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= success.message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+
+      <% if (error && error.message) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= error.message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+
+      <div class="card rounded-0 border-0 bg-transparent">
+
+        <div class="card-body">
+          <div class="row g-3 align-items-stretch mb-3" id="monitor-panel">
+
+            <!-- Uptime -->
+            <!-- <div class="col-lg-3 col-md-6 mb-3">
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body">
+                  <div class="monitor-icon">
+                    <i class="bi bi-clock-history text-muted"></i>
+                  </div>
+                  <h6 class="text-muted mb-1">Uptime</h6>
+                  <h5 id="uptime" class="fw-bold text-dark">-</h5>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Memory -->
+            <div class="col-lg-3 col-md-6 mb-3">
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body">
+                  <div class="monitor-icon">
+                    <i class="bi bi-memory text-muted"></i>
+                  </div>
+                  <h6 class="text-muted mb-1">Memory (RSS / Heap)</h6>
+                  <h5 id="memory" class="fw-bold text-dark">-</h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- CPU Load -->
+            <div class="col-lg-3 col-md-6 mb-3">
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body d-flex align-items-start justify-content-between">
+                  <!-- Kiri: Icon dan Label -->
+                  <div class="me-3 text-start">
+                    <div class="monitor-icon">
+                      <i class="bi bi-speedometer2"></i>
+                    </div>
+                    <h6 class="text-muted mb-2">CPU Load</h6>
+                  </div>
+
+                  <!-- Kanan: List CPU Load -->
+                  <ul id="cpu" class="list-unstyled mb-0 text-start small p-4">
+                    <li><span class="text-muted">1 Menit</span>: <span class="badge bg-secondary">-</span></li>
+                    <li><span class="text-muted">5 Menit</span>: <span class="badge bg-secondary">-</span></li>
+                    <li><span class="text-muted">15 Menit</span>: <span class="badge bg-secondary">-</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sistem Info -->
+            <div class="col-lg-3 col-md-6 mb-3">
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body ">
+                  <!-- Kanan: List CPU Load -->
+                  <ul class="list-group list-group-flush small">
+                    <li class="list-group-item  bg-transparent">Versi Aplikasi: <code ><%= sistemInfo.appVersion %></code></li>
+                    <li class="list-group-item  bg-transparent">Node.js: <code ><%= sistemInfo.nodeVersion %></code></li>
+                    <li class="list-group-item bg-transparent">Express.js: <code><%= sistemInfo.expressVersion %></code></li>
+                    <li class="list-group-item bg-transparent">OS: <code><%= sistemInfo.os %></code></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Bersihkan Log Aktivitas -->
+            <div class="col-lg-3 col-md-6 mb-3">
+
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body">
+                  <h4 class="text-muted text-center mb-5">Bersihkan Log Aktivitas</h4>
+
+                  <form action="/sistem/ringkasan/reset-log" method="POST" id="clean-log-activity">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-dark w-100 rounded-0">
+                      <i class="bi bi-trash"></i> Bersihkan Log Aktivitas
+                    </button>
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="row g-3 align-items-stretch mb-3 ">
+            <div class="col-sm-3">
+
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body">
+                  <h4 class="text-muted text-center mb-5">Backup Database</h4>
+
+                  <!-- Tombol Backup -->
+                  <form action="/sistem/ringkasan/backup" method="GET">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                    <button class="btn btn-dark w-100 rounded-0" type="submit">
+                      <i class="bi bi-download"></i> 
+                      Unduh Database (Backup)
+                    </button>
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-3">
+
+              <div class="card h-100 shadow-sm border-0 rounded-0 border-start bg-light">
+                <div class="card-body">
+                  <h4 class="text-muted text-center mb-3">Restore Database</h4>
+
+                  <!-- Form Restore -->
+                  <form action="/sistem/ringkasan/restore?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <input type="file" name="restoreFile" accept=".db" required class="form-control" id="restoreFile">
+                    </div>
+                    <button class="btn btn-dark w-100 rounded-0" type="submit">
+                      <i class="bi bi-upload"></i> Restore Database
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="confirmResetLogModal" tabindex="-1" aria-labelledby="confirmResetLogModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-header bg-dark text-white rounded-0">
+        <h5 class="modal-title" id="confirmResetLogModalLabel">Konfirmasi</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda yakin ingin menghapus semua log aktivitas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger rounded-0" id="confirmResetLog">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>

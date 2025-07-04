@@ -1,0 +1,41 @@
+<div class="container-fluid login-container">
+  <div class="row">
+    <!-- Kolom Kiri: Form Login -->
+    <div class="col-md-4 d-flex align-items-center justify-content-center p-5 login-form">
+      <div class="w-100">
+
+        <div class="my-4">
+          <div class="d-flex flex-row align-items-center">
+            <h1 class="display-6"> Login </h1>
+          </div>
+        </div>
+        
+        <form action="/auth/login" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control <%= error.validation?.inisial ? 'is-invalid' : '' %>" required value="<%= old?.username || '' %>" />
+            <% if (error.validation?.inisial) { %>
+              <div class="invalid-feedback"><%= error.validation.inisial %></div>
+            <% } %>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" id="password" name="password">
+              <button class="btn btn-link btn-text" type="button" id="show-pass" data-target="password"><i class="bi bi-eye"></i></button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-dark w-100 my-1">Masuk</button>
+          <a href="/" class="btn btn-link btn-text w-100 my-1"><i class="bi bi-arrow-left"></i> Kembali </a>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Kolom Kanan: Gambar -->
+    <div class="col-md-8 d-none d-md-block p-0">
+      <img src="/images/digital-art-style-illustration-thunderstorm.jpg" alt="Login Image" class="w-100 login-image" />
+    </div>
+  </div>
+</div>

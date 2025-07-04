@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Dashboard",
+    "slug": "dashboard",
+    "icon": "bi-speedometer",
+    "route": "/dashboard",
+    "permission": [
+      "access"
+    ]
+  },
+  {
+    "name": "Pengaturan",
+    "slug": "pengaturan",
+    "icon": "bi-sliders",
+    "route": "#",
+    "permission": [
+      "access"
+    ],
+    "children": [
+      {
+        "name": "Pengguna",
+        "slug": "pengaturan.pengguna",
+        "icon": "bi-sliders",
+        "route": "/pengaturan/users",
+        "permission": [
+          "access",
+          "create",
+          "delete",
+          "edit",
+          "setpermission"
+        ]
+      },
+      {
+        "name": "Izin Akses",
+        "slug": "pengaturan.permission",
+        "icon": "bi-sliders",
+        "route": "/pengaturan/permission",
+        "permission": [
+          "access",
+          "set"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sistem",
+    "slug": "sistem",
+    "icon": "bi-pc-display",
+    "route": "#",
+    "permission": [
+      "access"
+    ],
+    "children": [
+      {
+        "name": "Ringkasan",
+        "slug": "sistem.ringkasan",
+        "icon": "bi-activity",
+        "route": "/sistem/ringkasan",
+        "permission": [
+          "access"
+        ]
+      },
+      {
+        "name": "Log Aktivitas",
+        "slug": "log-activity",
+        "icon": "bi-activity",
+        "route": "/log-activity",
+        "permission": [
+          "access"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Notifikasi",
+    "slug": "notification",
+    "icon": "bi-bell",
+    "route": "/notifications",
+    "permission": [
+      "access"
+    ]
+  }
+]

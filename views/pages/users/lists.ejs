@@ -1,0 +1,91 @@
+<div class="container-fluid mt-2 mb-2">
+
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <div class="card rounded-0">
+        <div class="card-header bg-white">
+          <h5 class="card-title">Data Pengguna</h5>
+        </div>
+        <div class="card-body">
+
+          <% if (success && success.message) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= success.message %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% } %>
+
+          <% if (error && error.message) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= error.message %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% } %>
+            
+          <table id="userTable" class="table   table-hover w-100">
+            <thead class="table-dark">
+              <tr>
+                <th>Nama</th>
+                <th width="300">Username</th>
+                <th width="200">Peran</th>
+                <th width="350" class="text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tfoot class="table-light">
+              <tr>
+                <th><input type="text" placeholder="Cari Nama" class="form-control form-control-sm rounded-0" /></th>
+                <th><input type="text" placeholder="Cari Username" class="form-control form-control-sm rounded-0" /></th>
+                <th>
+                  <select name="role" id="role" class="form-control form-control-sm rounded-0">
+                    <option value="">Cari Peran</option>
+                  <% Object.entries(roles).forEach(([key, value]) => { %>
+                      <option value="<%=key%>"><%=value%></option>
+                    <% }) %>
+                  </select>
+                </th>
+                <th>
+                  <button id="clearFilterBtn" class="btn btn-sm btn-default w-100 rounded-0">
+                    <i class="bi bi-x-circle"></i> Hapus Filter
+                  </button>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<% if (hasPerm('pengaturan.pengguna', 'delete')) {  %>
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <div class="modal-header bg-dark text-white rounded-0">
+        <h5 class="modal-title">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body ">
+        Apakah Anda yakin ingin menghapus pengguna ini?
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-secondary  rounded-0" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger  rounded-0" id="confirmDeleteUser">Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>
+
+<div id="permissions" 
+data-can-create-user="<%= hasPerm('pengaturan.pengguna', 'create') %>"
+data-can-edit-user="<%= hasPerm('pengaturan.pengguna', 'edit') %>"
+data-can-delete-user="<%= hasPerm('pengaturan.pengguna', 'delete') %>"
+data-can-set-permission-user="<%= hasPerm('pengaturan.pengguna', 'setpermission') %>"
+></div>

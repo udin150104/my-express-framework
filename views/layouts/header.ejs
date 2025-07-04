@@ -1,0 +1,10 @@
+<nav class="navbar bg-white border-bottom px-3">
+  <a class="navbar-brand" href="/">
+    <img src="/favicon/favicon-96x96.png" alt="Noura Fajr" height="30" class="rounded-circle">
+  </a>
+  <% if (session.user) { %>
+    <div class="ms-auto">
+      <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer me-2"></i>Dashboard</a>
+    </div>
+  <% } %>
+</nav>

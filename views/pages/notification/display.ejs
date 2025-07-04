@@ -1,0 +1,64 @@
+<div class="container-fluid mt-2 mb-2">
+
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <div class="card rounded-0">
+        <div class="card-header bg-white">
+          <h5 class="card-title">Notifikasi</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex mb-4">
+            <div class="flex-grow-1">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/notifications?op=0&type=all" type="button" class="btn btn-light btn-text border-0 <%=(type === 'all')? 'active bg-dark-subtle':''%>   rounded-0"><i class="bi bi-inbox"></i> Semua</a>
+                <a href="/notifications?op=0&type=noread" type="button" class="btn btn-light btn-text border-0 <%=(type === 'noread')? 'active bg-dark-subtle':''%> "><i class="bi bi-app-indicator"></i> Belum dibaca</a>
+                <% if (pagination.prev !== null) { %>
+                  <a href="/notifications?op=<%= pagination.prev %>&type=<%=type%>" class="btn btn-link btn-text"><i class="bi bi-chevron-left"></i></a>
+                <% } else { %>
+                  <a class="btn btn-link btn-text text-muted"><i class="bi bi-chevron-left"></i></a>
+                <% } %>
+                <% if (pagination.next !== null) { %>
+                  <a href="/notifications?op=<%= pagination.next %>&type=<%=type%>" class="btn btn-link btn-text"><i class="bi bi-chevron-right"></i></a>
+                <% } else { %>
+                  <a class="btn btn-link btn-text text-muted"><i class="bi bi-chevron-right"></i></a>
+                <% } %>
+              </div>
+            </div>
+            <div class="">
+              <span class="text-muted">Total Nofikasi : <%=totalall%></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <% if (notification && notification.length > 0) { %>
+              <% notification.forEach(function(n) { %>
+                <div class="card mb-2 rounded-0 border-0 shadow-sm border-start <%=(n.is_read ==1)? 'border-dark-subtle':'border-danger-subtle'%> border-4">
+                  <div class="card-body rounded-0">
+                    <div class="small fw-semibold  text-truncate"><%= n.title %></div>
+                    <div class="small text-muted  text-truncate"><%= n.message %></div>
+                    <hr>
+                    <button type="button" data-init="<%= n.id  %>" id="btn-look-detail" class="btn btn-link btn-sm btn-text text-muted float-end m-0"><i class="bi bi-book"></i></button>
+                    <div class="small text-muted"><%= new Date(n.created_at).toLocaleString('id-ID') %></div>
+                  </div>
+                </div>
+                <% }) %>
+              <% }else{ %>
+                  <p class="text-muted">Belum ada notifikasi</p>
+              <% } %>
+              </div>
+              <div class="col-lg-9" id="detail-tamp">
+                <% if (notification && notification.length > 0) { %>
+                  <p class="text-muted p-2">Klik icon <i class="bi bi-book"></i> untuk membaca detail notifikasi</p>
+                <% } %>
+              </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

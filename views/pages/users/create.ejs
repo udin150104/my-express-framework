@@ -1,0 +1,166 @@
+<div class="container-fluid mt-2 mb-2">
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <div class="card rounded-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Tambah Data Pengguna</h5>
+          <a href="/pengaturan/users" class="btn btn-link btn-sm btn-text text-muted ms-2"><i class="bi bi-arrow-left"></i> Kembali</a>
+        </div>
+        <div class="card-body">
+
+          <div class="row ">
+            <div class="col-lg-12 ">
+
+            <% if (success && success.message) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <% if (error && error.message) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <form id="form" action="/pengaturan/users/save" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <!-- Nama Lengkap -->
+              <div class="row mb-1 align-items-center">
+                <label for="name" class="col-sm-3 col-form-label text-muted">Nama Lengkap</label>
+                <div class="col-sm-9">
+                  <input type="text" id="name" name="name"
+                    class="form-control w-100  <%=error.validation?.name ? 'is-invalid' : '' %>"
+                    >
+                  <% if (error.validation?.name) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.name %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Jenis Kelamin -->
+              <div class="row mb-1 align-items-center">
+                <label for="gender" class="col-sm-3 col-form-label text-muted">Jenis Kelamin</label>
+                <div class="col-sm-2">
+                  <select id="gender" name="gender"
+                    class="form-control  <%=error.validation?.gender ? 'is-invalid' : '' %>" >
+                    <option value="">Jenis Kelamin</option>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
+                  <% if (error.validation?.gender) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.gender %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Tanggal Lahir -->
+              <div class="row mb-1 align-items-center">
+                <label for="birth_date" class="col-sm-3 col-form-label text-muted">Tanggal Lahir</label>
+                <div class="col-sm-2">
+                  <input type="text" id="birth_date" name="birth_date" class="form-control datepicker" placeholder="DD/MM/YYYY" >
+                </div>
+              </div>
+
+              <!-- Nomor Telepon -->
+              <div class="row mb-1 align-items-center">
+                <label for="phone" class="col-sm-3 col-form-label text-muted">No. Telepon</label>
+                <div class="col-sm-3">
+                  <input type="text" id="phone" name="phone" class="form-control" placeholder="-" >
+                </div>
+              </div>
+              <br>
+              <h3 class="display-7 fw-semibold m-0 text-muted">Akun</h3>
+              <!-- Username -->
+              <div class="row mb-1 mt-4 align-items-center" id="usernameRow">
+                <label for="username" class="col-sm-3 col-form-label text-muted">Username</label>
+                <div class="col-sm-6">
+                  <input type="text" id="username" name="username" class="form-control w-100  <%=error.validation?.username ? 'is-invalid' : '' %>" >
+                    <% if (error.validation?.username) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.username %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Password Baru -->
+              <div class="row mb-1 align-items-center" id="passwordRow">
+                <label for="password" class="col-sm-3 col-form-label text-muted">Kata Sandi</label>
+                <div class="col-sm-6">
+                  <input type="password" id="password" name="password" class="form-control w-100  <%=error.validation?.password ? 'is-invalid' : '' %>" >
+                  <% if (error.validation?.password) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.password %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Konfirmasi Password -->
+              <div class="row mb-1 align-items-center" id="passwordConfirmRow">
+                <label for="password_confirm" class="col-sm-3 col-form-label text-muted">Konfirmasi Kata Sandi</label>
+                <div class="col-sm-6">
+                  <input type="password" id="password_confirm" name="password_confirm" class="form-control w-100  <%=error.validation?.password_confirm ? 'is-invalid' : '' %>"
+                    >
+                  <% if (error.validation?.password_confirm) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.password_confirm %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <div class="row mb-1 align-items-center">
+                <label for="role" class="col-sm-3 col-form-label text-muted">Peran</label>
+                <div class="col-sm-3">
+                  <select id="role" name="role"
+                    class="form-control  <%=error.validation?.role ? 'is-invalid' : '' %>" >
+                    <option value="">Pilih Peran</option>
+                  <% Object.entries(roles).forEach(([key, value]) => { %>
+                      <option value="<%=key%>"><%=value%></option>
+                    <% }) %>
+                  </select>
+                  <% if (error.validation?.role) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.role %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Tombol -->
+              <div class="row mb-3 mt-3" id="submitGroup">
+                <div class="offset-sm-3 col-sm-9">
+                  <button type="submit"  name="action" value="save_back" class="btn btn-dark rounded-0">
+                    <i class="bi bi-floppy me-2"></i>Simpan dan Kembali
+                  </button>
+                  <button type="submit"  name="action" value="save" class="btn btn-dark rounded-0">
+                    <i class="bi bi-floppy me-2"></i>Simpan
+                  </button>
+                  <button type="button" id="showPasswordBtn" class="btn btn-link btn-text text-dark ms-2">
+                    <i class="bi bi-eye me-2"></i>Tampilkan Kata Sandi
+                  </button>
+                  <a href="/pengaturan/users" class="btn btn-link btn-text text-muted ms-2">Batal</a>
+                </div>
+              </div>
+            </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

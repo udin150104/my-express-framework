@@ -1,0 +1,10 @@
+# Abaikan semua file .log di folder logs/
+logs/*.log
+
+# Jangan abaikan file lain di folder logs/
+!logs/
+!logs/**/
+!logs/*.txt
+
+# Abaikan node_modules
+node_modules/

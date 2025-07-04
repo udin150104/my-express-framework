@@ -1,0 +1,7 @@
+{
+  "superadmin": "Super Administrator",
+  "admin": "Administrator",
+  "approver": "Approver",
+  "operator": "Operator",
+  "viewer": "Viewer"
+}

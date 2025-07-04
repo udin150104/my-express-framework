@@ -1,0 +1,126 @@
+<div class="container-fluid mt-2 mb-2">
+
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <form id="form" action="/pengaturan/permission/saveUpdateUser" method="POST">
+        <div class="card  rounded-0">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h5 class="card-title">Izin Akses</h5>
+            <div>
+              <a href="/pengaturan/users" class="btn btn-link btn-sm btn-text text-muted ms-2"><i class="bi bi-arrow-left"></i> Kembali</a>
+            </div>
+          </div>
+          <div class="card-body">
+
+            <% if (success && success.message) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <% if (error && error.message) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th width="200">Nama Pengguna</th>
+                  <td><%=user.name%></td>
+                </tr>
+                <tr>
+                  <th>Username</th>
+                  <td><%=user.username%></td>
+                </tr>
+                <tr>
+                  <th>Peran</th>
+                  <td>
+                    <% Object.entries(roles).forEach(([key, value]) => { %>
+                        <%= (key === user.role) ? value:''%>
+                      <% }) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <b>Atur Izin Akses </b> 
+            <br>
+            <br>
+            <% if (hasPerm('pengaturan.pengguna', 'setpermission')) { %>
+              <button type="submit" class="btn btn-dark btn-sm  rounded-0">
+                <i class="bi bi-floppy me-2"></i>Simpan Pengaturan
+              </button>
+            <% } %>
+            <br>
+            <br>
+            <input type="hidden" name="user_id" value="<%=user.id%>" />
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                  </th>
+                  <% permissionTypes.forEach(p => { %>
+                    <th width="140" class="text-center"><%= permissionLabels[p] || p %></th>
+                  <% }) %>
+                </tr>
+              </thead>
+              <tbody>
+                <% menus.forEach(menu => { %>
+                  <tr>
+                    <td><i class="bi <%= menu.icon %>"></i> <%= menu.name %></td>
+                    <% permissionTypes.forEach(p => {
+                        const key = `${menu.slug}:${p}`;
+                        const isGranted = permissionMap[key];
+                        const isUserChecked = userPermissionMap[key]; 
+                      %>
+                      <td class="text-center <%= (menu.permission.includes(p))? '':'bg-secondary-subtle' %>">
+                          <% if(menu.permission.includes(p)){
+                            if(isGranted){ %>
+                              <i class="bi bi-check2-square text-primary"></i> <small class="text-muted">(bawaan peran)</small>
+                          <% } else { %>
+                              <input type="checkbox" class="perm-checkbox" name="permissions[<%= menu.slug %>][<%= p %>]" value="1" <%= isUserChecked ? 'checked' : '' %> />
+                          <% } %>
+                        <% } %>
+                      </td>
+                    <% }) %>
+                  </tr>
+                  <% if (menu.children && Array.isArray(menu.children)) { %>
+                    <% menu.children.forEach(child => {%>
+                      <tr>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= child.name %></td>
+                        <% permissionTypes.forEach(p => { 
+                            const key = `${child.slug}:${p}`;
+                            const isGranted = permissionMap[key];
+                            const isUserChecked = userPermissionMap[key]; 
+                          %>
+                        <td class="text-center  <%= (child.permission.includes(p))? '':'bg-secondary-subtle' %>">
+                          <% if(child.permission.includes(p)){ 
+                            if(isGranted){ %>
+                              <i class="bi bi-check2-square text-primary"></i> <small class="text-muted">(bawaan peran)</small>
+                          <% } else { %>
+                              <input type="checkbox" class="perm-checkbox" name="permissions[<%= child.slug %>][<%= p %>]" value="1" <%= isUserChecked ? 'checked' : '' %> />
+                          <% } %>
+                        <% } %>
+                        </td>
+                      <% }) %>
+                      </tr>
+                    <% }) %>
+                  <% } %>
+                <% }) %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

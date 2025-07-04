@@ -1,0 +1,89 @@
+<div class="container-fluid mt-2 mb-2">
+
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <form id="form" action="/pengaturan/permission/saveUpdate" method="POST">
+        <div class="card  rounded-0">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h5 class="card-title">Izin Akses</h5>
+            <div>
+            <% if (hasPerm('pengaturan.permission', 'set')) { %>
+              <button type="submit" class="btn btn-dark btn-sm  rounded-0">
+                <i class="bi bi-floppy me-2"></i>Simpan Pengaturan
+              </button>
+            <% } %>
+            </div>
+          </div>
+          <div class="card-body">
+
+            <% if (success && success.message) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <% if (error && error.message) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+            
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <select name="role" id="role" class="form-control form-control-sm rounded-0">
+                      <option value="">Pilih Peran</option>
+                    <% Object.entries(roles).forEach(([key, value]) => { %>
+                        <option value="<%=key%>"><%=value%></option>
+                      <% }) %>
+                    </select>
+                  </th>
+                  <% permissionTypes.forEach(p => { %>
+                    <th width="100" class="text-center"><%= permissionLabels[p] || p %></th>
+                  <% }) %>
+                </tr>
+              </thead>
+              <tbody>
+                <% menus.forEach(menu => { %>
+                  <tr>
+                    <td><i class="bi <%= menu.icon %>"></i> <%= menu.name %></td>
+                    <% permissionTypes.forEach(p => { %>
+                      <td class="text-center <%= (menu.permission.includes(p))? '':'bg-secondary-subtle' %>">
+                          <% if(menu.permission.includes(p)){ %>
+                          <input type="checkbox" class="perm-checkbox" data-slug="<%= menu.slug %>" data-permission="<%= p %>" name="permissions[<%= menu.slug %>][<%= p %>]" value="1" <%=hasPerm('pengaturan.permission', 'set')? '' : 'disabled'%>/>
+                        <% } %>
+                      </td>
+                    <% }) %>
+                  </tr>
+                  <% if (menu.children && Array.isArray(menu.children)) { %>
+                    <% menu.children.forEach(child => { %>
+                      <tr>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= child.name %></td>
+                        <% permissionTypes.forEach(p => { %>
+                        <td class="text-center  <%= (child.permission.includes(p))? '':'bg-secondary-subtle' %>">
+                          <% if(child.permission.includes(p)){ %>
+                          <input type="checkbox" class="perm-checkbox" data-slug="<%= child.slug %>" data-permission="<%= p %>" name="permissions[<%= child.slug %>][<%= p %>]" value="1" <%=hasPerm('pengaturan.permission', 'set')? '' : 'disabled'%>/>
+                        <% } %>
+                        </td>
+                      <% }) %>
+                      </tr>
+                    <% }) %>
+                  <% } %>
+                <% }) %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

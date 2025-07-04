@@ -1,0 +1,163 @@
+<div class="container-fluid mt-2 mb-2">
+  <div class="row ">
+    <div class="col-lg-12 ">
+      <div class="card  rounded-0 border-1 ">
+        <div class="row g-0 card-profil">
+
+          <!-- KIRI: Info -->
+          <div
+            class="col-md-4 py-4 bg-dark text-white p-4 rounded-0 d-flex align-items-center justify-content-center">
+            <div class="text-center">
+              <i class="bi bi-person-circle display-1 mb-3"></i>
+              <h4 class="fw-bold">
+                <%= user.name %>
+              </h4>
+              <p class="text-white-50">@<%= user.username %>
+              </p>
+            </div>
+          </div>
+
+
+          <!-- KANAN: Display & Edit -->
+          <div class="col-md-8 p-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="display-6 fw-semibold m-0 text-muted">Profil</h3>
+              <div>
+                <button id="editBtn" class="btn bg-dark btn-link text-white btn-sm rounded-0 px-4  rounded-0">
+                  <i class="bi bi-pencil-square me-1"></i> Ubah
+                </button>
+              </div>
+            </div>
+            
+            <% if (success && success.message) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <% if (error && error.message) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error.message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% } %>
+
+            <form id="editForm" action="/profile/update" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+              <!-- Nama Lengkap -->
+              <div class="row mb-1 align-items-center">
+                <label for="name" class="col-sm-3 col-form-label text-muted">Nama Lengkap</label>
+                <div class="col-sm-9">
+                  <input type="text" id="name" name="name"
+                    class="form-control-plaintext w-100  <%=error.validation?.name ? 'is-invalid' : '' %>"
+                    value="<%= old?.name || user.name %>" disabled>
+                  <% if (error.validation?.name) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.name %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Jenis Kelamin -->
+              <div class="row mb-1 align-items-center">
+                <label for="gender" class="col-sm-3 col-form-label text-muted">Jenis Kelamin</label>
+                <div class="col-sm-6">
+                  <select id="gender" name="gender"
+                    class="form-control-plaintext  <%=error.validation?.gender ? 'is-invalid' : '' %>" disabled>
+                    <option value="">Jenis Kelamin</option>
+                    <option value="L" <%=user.profile?.gender==='L' ? 'selected' : '' %>>Laki-laki</option>
+                    <option value="P" <%=user.profile?.gender==='P' ? 'selected' : '' %>>Perempuan</option>
+                  </select>
+                  <% if (error.validation?.gender) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.gender %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Tanggal Lahir -->
+              <div class="row mb-1 align-items-center">
+                <label for="birth_date" class="col-sm-3 col-form-label text-muted">Tanggal Lahir</label>
+                <div class="col-sm-6">
+                  <input type="text" id="birth_date" name="birth_date" class="form-control-plaintext datepicker"
+                    value="<%= user.profile?.birth_date || '' %>" placeholder="DD/MM/YYYY" disabled>
+                </div>
+              </div>
+
+              <!-- Nomor Telepon -->
+              <div class="row mb-1 align-items-center">
+                <label for="phone" class="col-sm-3 col-form-label text-muted">No. Telepon</label>
+                <div class="col-sm-6">
+                  <input type="text" id="phone" name="phone" class="form-control-plaintext"
+                    value="<%= user.profile?.phone || '' %>" placeholder="-" disabled>
+                </div>
+              </div>
+
+              <!-- Username -->
+              <div class="row mb-1 mt-4 align-items-center d-none" id="usernameRow">
+                <div id="passwordHelp" class="col-12 text-muted mb-3"><i class="bi bi-info-circle-fill me-2"></i>Biarkan
+                  Kata Sandi dan Konfirmasi Kata Sandi kosong jika tidak ingin diubah! </div>
+                <label for="username" class="col-sm-3 col-form-label text-muted">Username</label>
+                <div class="col-sm-6">
+                  <input type="text" id="username" name="username" class="form-control-plaintext w-100  <%=error.validation?.username ? 'is-invalid' : '' %>"
+                    value="<%= user.username %>" disabled>
+                    <% if (error.validation?.username) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.username %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Password Baru -->
+              <div class="row mb-1 align-items-center d-none" id="passwordRow">
+                <label for="password" class="col-sm-3 col-form-label text-muted">Kata Sandi Baru</label>
+                <div class="col-sm-6">
+                  <input type="password" id="password" name="password" class="form-control w-100  <%=error.validation?.password ? 'is-invalid' : '' %>" disabled>
+                  <% if (error.validation?.password) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.password %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Konfirmasi Password -->
+              <div class="row mb-1 align-items-center d-none" id="passwordConfirmRow">
+                <label for="password_confirm" class="col-sm-3 col-form-label text-muted">Konfirmasi Kata Sandi</label>
+                <div class="col-sm-6">
+                  <input type="password" id="password_confirm" name="password_confirm" class="form-control w-100  <%=error.validation?.password_confirm ? 'is-invalid' : '' %>"
+                    disabled>
+                  <% if (error.validation?.password_confirm) { %>
+                    <div class="invalid-feedback">
+                      <%= error.validation.password_confirm %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+
+              <!-- Tombol -->
+              <div class="row mb-3 mt-3 d-none" id="submitGroup">
+                <div class="offset-sm-3 col-sm-9">
+                  <button type="submit" class="btn btn-dark rounded-0">
+                    <i class="bi bi-floppy me-2"></i>Simpan Perubahan
+                  </button>
+                  <button type="button" id="showPasswordBtn" class="btn btn-link btn-text text-dark ms-2 rounded-0">
+                    <i class="bi bi-eye me-2"></i>Tampilkan Kata Sandi
+                  </button>
+                  <button type="button" id="cancelBtn" class="btn btn-link btn-text text-muted ms-2">Batal</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

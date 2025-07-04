@@ -1,0 +1,115 @@
+<nav class="navbar bg-white border-bottom px-3">
+  <a class="navbar-brand" href="/">
+    <img src="/favicon/favicon-96x96.png" alt="Noura Fajr" height="30" class="rounded-circle">
+  </a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="offcanvas offcanvas-start w-250px" tabindex="-1" id="offcanvasDarkNavbar"
+    aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas-header justify-content-between border-bottom">
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center mb-1">
+          <i class="bi bi-person-circle me-2 fs-2"></i>
+          <div class="text-truncate" >
+            <strong class="d-block text-truncate">
+              <%= session.user?.name || 'Guest' %>
+            </strong>
+            <small class="text-muted d-block text-truncate">
+              @<%= session.user?.username || 'anonymous' %>
+            </small>
+          </div>
+        </div>
+        <% if (session.user) { %>
+          <a href="/profile/edit" class="btn btn-sm btn-link btn-text text-muted px-2 py-1">
+            <i class="bi bi-pencil-square me-1"></i> Ubah Profil
+          </a>
+          <% } %>
+      </div>
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <% menus.forEach(menu => { %>
+          <% if (!menu.children) { %>
+            <% if (hasPerm(menu.slug, 'access')) {  %>
+              <li class="nav-item">
+                <a class="nav-link <%= currentPath === menu.route ? 'active' : '' %>" aria-current="page" href="<%= menu.route %>">
+                  <span class="d-flex align-items-center">
+                    <i class="bi <%= menu.icon %> me-2"></i>
+                    <span><%= menu.name %></span>
+                  </span>
+                </a>
+              </li>
+            <% } %>
+          <% } else { %>
+            <!-- Dropdown Menu -->
+            <% if (hasPerm(menu.slug, 'access')) {  %>
+            <li class="nav-item dropdown">
+              <a class="nav-link <%= currentPath.startsWith(menu.children[0].route.split('/')[1] ? '/' + menu.children[0].route.split('/')[1] : '') ? 'active show' : '' %> dropdown-toggle d-flex justify-content-between align-items-center w-100"
+                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="<%= currentPath.startsWith(menu.children[0].route.split('/')[1] ? '/' + menu.children[0].route.split('/')[1] : '') ? 'true' : 'false' %>">
+                <span class="d-flex align-items-center">
+                  <i class="bi <%= menu.icon %> me-2"></i>
+                  <span><%= menu.name %></span>
+                </span>
+                <span class="dropdown-caret"></span>
+              </a>
+              <ul class="dropdown-menu border-0 border-start rounded-0 <%= currentPath.startsWith(menu.children[0].route.split('/')[1] ? '/' + menu.children[0].route.split('/')[1] : '') ? 'show' : '' %>">
+                <% menu.children.forEach(child => { %>
+                <% if (hasPerm(child.slug, 'access')) { %>
+                  <li>
+                    <a class="dropdown-item my-1 <%= currentPath.startsWith(child.route) ? 'active' : '' %>" href="<%= child.route %>">
+                      <%= child.name %>
+                    </a>
+                  </li>
+                <% } %>
+                <% }) %>
+              </ul>
+            </li>
+            <% } %>
+          <% } %>
+        <% }) %>
+      </ul>
+
+    </div>
+  </div>
+  <div class="ms-auto d-flex align-items-center gap-2">
+    <% if (hasPerm('notification', 'access')) { %>
+    <div class="dropdown me-3">
+      <a class="nav-link position-relative" href="#" role="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-bell "></i>
+        <% if (notifications_notif && notifications_notif.length > 0) { %>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count-notif">
+            <%= notifications_notif.length %>
+          </span>
+        <% } %>
+      </a>
+
+      <ul class="dropdown-menu dropdown-menu-end shadow-sm notif-body rounded-0" aria-labelledby="notificationDropdown">
+        <li class="dropdown-header fw-bold">Notifikasi</li>
+        <% if (notifications_notif && notifications_notif.length > 0) { %>
+          <% notifications_notif.slice(0, 5).forEach(n => { %>
+            <li>
+              <a class="dropdown-item d-flex align-items-start gap-2" href="/notifications">
+                <!-- <i class="bi bi-info-circle text-dark"></i> -->
+                <div class="w-100">
+                  <div class="small fw-semibold truncate-2 "><%= n.title %></div>
+                  <div class="small text-muted truncate-2 "><%= n.message %></div>
+                  <div class="small text-muted"><%= new Date(n.created_at).toLocaleString('id-ID') %></div>
+                </div>
+              </a>
+            </li>
+          <% }) %>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-center text-dark fw-semibold" href="/notifications">Lihat Semua</a></li>
+        <% } else { %>
+          <li><p class="dropdown-item text-muted">Belum ada notifikasi</p></li>
+        <% } %>
+      </ul>
+    </div>
+    <% } %>
+    <a class="nav-link" href="/auth/logout" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
+  </div>
+</nav>

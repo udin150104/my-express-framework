@@ -1,0 +1,45 @@
+{
+  "name": "my-exp-framework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon app.js",
+    "build": "pkg ."
+  },
+  "keywords": [
+    "nodejs",
+    "Express",
+    "Framework",
+    "Syahrudin Simanjuntak Express Framework"
+  ],
+  "author": "Syahrudin Simanjuntak <udin150104@gmail.com>",
+  "license": "UNLICENSED",
+  "description": "Framework simple saya",
+  "engines": {
+    "node": "22.16.0"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-flash": "^0.1.1",
+    "connect-session-sequelize": "^8.0.0",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^17.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "glob": "^11.0.3",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.1",
+    "rotating-file-stream": "^3.2.6",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-title" content="Noura Fajr" />
+  <title>
+    Halaman <%= title %>
+  </title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="preload" rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="preload" rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+  <link rel="preload" rel="icon" href="/favicon/favicon-96x96.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="stylesheet" href="/vendor/boostrap-5.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/vendor/bootstrap-icons-1.13.1/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/vendor/flatpickr/flatpickr.min.css">
+  <link rel="stylesheet" href="/vendor/DataTables/datatables.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <meta name="csrf-token" content="<%= csrfToken %>">
+</head>
+
+<body>
+  <%- include('./layouts/header_app') %>
+  <main>
+    <%- body %>
+  </main>
+  <%- include('./layouts/footer') %>
+  <script src="/vendor/boostrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery-3.7.1.min.js"></script>
+  <script src="/vendor/flatpickr/flatpickr.js"></script>
+  <script src="/vendor/DataTables/datatables.min.js"></script>
+  <script src="/js/general.js"></script>
+  <% if (typeof controllers !== 'undefined' && controllers) { %>
+    <% if (Array.isArray(controllers)) { %>
+      <% controllers.forEach(file => { %>
+        <script src="/<%= file %>"></script>
+      <% }) %>
+    <% } else if (controllers) { %>
+      <script src="/<%= controllers %>"></script>
+    <% } %>
+  <% } %>
+</body>
+
+</html>

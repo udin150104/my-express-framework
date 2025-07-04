@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-title" content="Noura Fajr">
+  <title>
+    Halaman Users
+  </title>
+  <link rel="icon" type="image/png" href="Halaman%20Users_files/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="http://localhost:3000/favicon/favicon.svg">
+  <link rel="preload" href="http://localhost:3000/favicon/favicon.ico">
+  <link rel="preload" href="http://localhost:3000/favicon/favicon.ico" type="image/x-icon">
+  <link rel="preload" href="Halaman%20Users_files/favicon-96x96.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:3000/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="http://localhost:3000/favicon/site.webmanifest">
+  <link rel="stylesheet" href="Halaman%20Users_files/bootstrap.min.css">
+  <link rel="stylesheet" href="Halaman%20Users_files/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="Halaman%20Users_files/flatpickr.min.css">
+  <link rel="stylesheet" href="Halaman%20Users_files/datatables.min.css">
+  <link rel="stylesheet" href="Halaman%20Users_files/style.css">
+  <meta name="csrf-token" content="0pApVGag-qOQyPWlQ902r1yUb8Dq3FBKnl5k">
+</head>
+
+<body>
+  <nav class="navbar bg-white border-bottom px-3">
+  <a class="navbar-brand" href="http://localhost:3000/">
+    <img src="Halaman%20Users_files/favicon-96x96.png" alt="Noura Fajr" height="30" class="rounded-circle">
+  </a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="offcanvas offcanvas-start w-250px" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas-header justify-content-between border-bottom">
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center mb-1">
+          <i class="bi bi-person-circle me-2 fs-2"></i>
+          <div class="text-truncate">
+            <strong class="d-block text-truncate">
+              Noura Fajr
+            </strong>
+            <small class="text-muted d-block text-truncate">
+              @nourafajr04
+            </small>
+          </div>
+        </div>
+        
+          <a href="http://localhost:3000/profile/edit" class="btn btn-sm btn-link btn-text text-muted px-2 py-1">
+            <i class="bi bi-pencil-square me-1"></i> Ubah Profil
+          </a>
+          
+      </div>
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        
+          
+            
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="http://localhost:3000/dashboard">
+                  <span class="d-flex align-items-center">
+                    <i class="bi bi-speedometer me-2"></i>
+                    <span>Dashboard</span>
+                  </span>
+                </a>
+              </li>
+            
+          
+        
+          
+            <!-- Dropdown Menu -->
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link active show dropdown-toggle d-flex justify-content-between align-items-center w-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                <span class="d-flex align-items-center">
+                  <i class="bi bi-sliders me-2"></i>
+                  <span>Pengaturan</span>
+                </span>
+                <span class="dropdown-caret"></span>
+              </a>
+              <ul class="dropdown-menu border-0 border-start rounded-0 show">
+                
+                
+                  <li>
+                    <a class="dropdown-item my-1 active" href="http://localhost:3000/pengaturan/users">
+                      Pengguna
+                    </a>
+                  </li>
+                
+                
+                
+                  <li>
+                    <a class="dropdown-item my-1 " href="http://localhost:3000/pengaturan/permission">
+                      Izin Akses
+                    </a>
+                  </li>
+                
+                
+              </ul>
+            </li>
+            
+          
+        
+          
+            <!-- Dropdown Menu -->
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link  dropdown-toggle d-flex justify-content-between align-items-center w-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="d-flex align-items-center">
+                  <i class="bi bi-pc-display me-2"></i>
+                  <span>Sistem</span>
+                </span>
+                <span class="dropdown-caret"></span>
+              </a>
+              <ul class="dropdown-menu border-0 border-start rounded-0 ">
+                
+                
+                  <li>
+                    <a class="dropdown-item my-1 " href="http://localhost:3000/log-activity">
+                      Log Aktivitas
+                    </a>
+                  </li>
+                
+                
+              </ul>
+            </li>
+            
+          
+        
+      </ul>
+
+    </div>
+  </div>
+  <div class="ms-auto">
+    <a class="nav-link" href="http://localhost:3000/auth/logout" title="Logout"><i class="bi bi-box-arrow-right"></i></a>
+  </div>
+</nav>
+  <main>
+    <div class="container-fluid mt-2 mb-2">
+
+
+  <div class="row ">
+    <div class="col-lg-12 ">
+
+      <div class="card">
+        <div class="card-header bg-white">
+          <h5 class="card-title">Data Pengguna</h5>
+        </div>
+        <div class="card-body">
+
+          
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              Data berhasil diperbarui.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          
+
+          
+            
+          <div id="userTable_wrapper" class="dt-container dt-bootstrap5"><div id="" class="row mb-2 align-items-center"><div id="" class="col-md-6 d-flex align-items-center gap-2"><div class="dt-buttons btn-group flex-wrap"><button class="btn btn-secondary btn-sm btn-dark" tabindex="0" aria-controls="userTable" type="button"><span>Tambah Pengguna</span></button> </div></div><div id="" class="col-md-6 d-flex justify-content-end gap-2"><div class="dt-length"><label for="dt-length-0">Tampilkan <select aria-controls="userTable" class="form-select form-select-sm" id="dt-length-0"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>  </label></div><div class="dt-search"><label for="dt-search-0">Cari:</label><input type="search" class="form-control form-control-sm" id="dt-search-0" placeholder="" aria-controls="userTable"></div></div></div><div id="userTable_processing" class="dt-processing card" role="status" style="display: none;">Memuat...<div><div></div><div></div><div></div><div></div></div></div><table id="userTable" class="table table-hover w-100 dataTable" aria-describedby="userTable_info" style="width: 100%;"><colgroup><col data-dt-column="0" style="width: 366px;"><col data-dt-column="1" style="width: 300px;"><col data-dt-column="2" style="width: 200px;"><col data-dt-column="3" style="width: 350px;"></colgroup>
+            <thead class="table-dark">
+              <tr><th data-dt-column="0" rowspan="1" colspan="1" class="dt-orderable-asc dt-orderable-desc dt-ordering-asc" aria-sort="ascending"><div class="dt-column-header"><span class="dt-column-title">Nama</span><span class="dt-column-order" role="button" aria-label="Nama: Activate to invert sorting" tabindex="0"></span></div></th><th width="300" data-dt-column="1" rowspan="1" colspan="1" class="dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><span class="dt-column-title">Username</span><span class="dt-column-order" role="button" aria-label="Username: Activate to sort" tabindex="0"></span></div></th><th width="200" data-dt-column="2" rowspan="1" colspan="1" class="dt-orderable-asc dt-orderable-desc"><div class="dt-column-header"><span class="dt-column-title">Peran</span><span class="dt-column-order" role="button" aria-label="Peran: Activate to sort" tabindex="0"></span></div></th><th width="350" class="text-center dt-orderable-none" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Aksi</span><span class="dt-column-order"></span></div></th></tr>
+            </thead><tbody><tr><td class="sorting_1">Noura Fajr</td><td>nourafajr04</td><td><span class="badge bg-secondary">Super Administrator</span></td><td class="text-center">
+          <a href="http://localhost:3000/pengaturan/users/1/permission" class="btn btn-sm btn-dark me-1">
+            <i class="bi bi-universal-access-circle"></i> Atur Izin Akses
+          </a>
+          <a href="http://localhost:3000/pengaturan/users/1/edit" class="btn btn-sm btn-dark me-1">
+            <i class="bi bi-pencil"></i> Ubah
+          </a>          
+          <button class="btn btn-sm btn-default text-danger btn-delete-user" data-id="1">
+            <i class="bi bi-trash"></i> Hapus
+          </button>
+          </td></tr><tr><td class="sorting_1">admin</td><td>approver</td><td>approver</td><td class="text-center">
+          <a href="http://localhost:3000/pengaturan/users/6/permission" class="btn btn-sm btn-dark me-1">
+            <i class="bi bi-universal-access-circle"></i> Atur Izin Akses
+          </a>
+          <a href="http://localhost:3000/pengaturan/users/6/edit" class="btn btn-sm btn-dark me-1">
+            <i class="bi bi-pencil"></i> Ubah
+          </a>          
+          <button class="btn btn-sm btn-default text-danger btn-delete-user" data-id="6">
+            <i class="bi bi-trash"></i> Hapus
+          </button>
+          </td></tr></tbody>
+            <tfoot class="table-light">
+              <tr><th data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-footer"><span class="dt-column-title"><input type="text" placeholder="Cari Nama" class="form-control form-control-sm"></span></div></th><th data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-footer"><span class="dt-column-title"><input type="text" placeholder="Cari Username" class="form-control form-control-sm"></span></div></th><th data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-footer"><span class="dt-column-title">
+                  <select name="role" id="role" class="form-control form-control-sm">
+                    <option value="" selected="selected">Cari Peran</option>
+                  
+                      <option value="superadmin">Super Administrator</option>
+                    
+                      <option value="admin">Administrator</option>
+                    
+                      <option value="approver">Approver</option>
+                    
+                      <option value="operator">Operator</option>
+                    
+                      <option value="viewer">Viewer</option>
+                    
+                  </select>
+                </span></div></th><th class="text-center" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-footer"><span class="dt-column-title">
+                  <button id="clearFilterBtn" class="btn btn-sm btn-default w-100">
+                    <i class="bi bi-x-circle"></i> Hapus Filter
+                  </button>
+                </span></div></th></tr>
+            </tfoot>
+          </table><div id="" class="row mt-2 align-items-center"><div id="" class="col-md-6"><div class="dt-info" aria-live="polite" id="userTable_info" role="status">Menampilkan 1 sampai 2 dari 2 data</div></div><div id="" class="col-md-6 d-flex justify-content-end"><div class="dt-paging"><nav aria-label="pagination"><ul class="pagination"><li class="dt-paging-button page-item disabled"><button class="page-link first" role="link" type="button" aria-controls="userTable" aria-disabled="true" aria-label="First" data-dt-idx="first" tabindex="-1">Pertama</button></li><li class="dt-paging-button page-item disabled"><button class="page-link previous" role="link" type="button" aria-controls="userTable" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">Sebelumnya</button></li><li class="dt-paging-button page-item active"><button class="page-link" role="link" type="button" aria-controls="userTable" aria-current="page" data-dt-idx="0">1</button></li><li class="dt-paging-button page-item disabled"><button class="page-link next" role="link" type="button" aria-controls="userTable" aria-disabled="true" aria-label="Next" data-dt-idx="next" tabindex="-1">Berikutnya</button></li><li class="dt-paging-button page-item disabled"><button class="page-link last" role="link" type="button" aria-controls="userTable" aria-disabled="true" aria-label="Last" data-dt-idx="last" tabindex="-1">Terakhir</button></li></ul></nav></div></div></div><div style="width: 100%; height: 0px;" class="dt-autosize"></div></div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda yakin ingin menghapus pengguna ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteUser">Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="permissions" data-can-create-user="true" data-can-edit-user="true" data-can-delete-user="true" data-can-set-permission-user="true"></div>
+  </main>
+  <footer class="pt-4 pb-2 px-4 bg-white border-top">
+  <p><b>Noura Fajr</b> © 2025 </p>
+</footer>
+
+  <script src="Halaman%20Users_files/bootstrap.bundle.min.js"></script>
+  <script src="Halaman%20Users_files/jquery-3.7.1.min.js"></script>
+  <script src="Halaman%20Users_files/flatpickr.js"></script>
+  <script src="Halaman%20Users_files/datatables.min.js"></script>
+  <script src="Halaman%20Users_files/general.js"></script>
+  
+    
+      <script src="Halaman%20Users_files/user.js"></script>
+    
+  
+
+
+</body></html>
