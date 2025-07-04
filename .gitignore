@@ -9,3 +9,6 @@ logs/*.log
 
 # Abaikan node_modules
 node_modules/
+
+# Abaikan database.db
+databases/database.db
