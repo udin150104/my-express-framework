@@ -40,7 +40,7 @@ exports.index = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Ringkasan',
+    title: 'Sistem Ringkasan',
     body: body,
     controllers: 'js/controllers/sistem/ringkasan.js'
   });

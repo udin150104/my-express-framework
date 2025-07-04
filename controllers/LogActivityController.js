@@ -22,7 +22,7 @@ exports.index = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Permissions',
+    title: 'Log Aktivitas',
     body: body,
     controllers: 'js/controllers/logactivity.js'
     // controllers: ''

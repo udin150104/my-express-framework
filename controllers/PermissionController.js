@@ -48,7 +48,7 @@ exports.index = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Permissions',
+    title: 'Izin Akses',
     body: body,
     controllers: 'js/controllers/permissions/lists.js'
     // controllers: ''

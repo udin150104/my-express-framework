@@ -79,7 +79,7 @@ exports.permission = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'User Permissions',
+    title: 'Izin Akses User',
     body: body,
     controllers: 'js/controllers/users/permission.js'
     // controllers: ''
@@ -114,7 +114,7 @@ exports.index = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Users',
+    title: 'Pengguna',
     body: body,
     controllers: 'js/controllers/users/user.js'
   });
@@ -140,7 +140,7 @@ exports.create = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Users',
+    title: 'Form Pengguna',
     body: body,
     controllers: 'js/controllers/users/form.js'
   });
@@ -173,7 +173,7 @@ exports.edit = async (req, res) => {
   );
 
   res.render('app', {
-    title: 'Users',
+    title: 'Form Pengguna',
     body: body,
     controllers: 'js/controllers/users/form.js'
   });
